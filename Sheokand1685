@@ -1,0 +1,92 @@
+git remote add origin https://github.com/SHEOKAND1685/SHEOKAND1685.git
+git branch -M main
+git push -u origin main<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Puzzle Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Puzzle Game</h1>
+        <div id="puzzle" class="puzzle">
+            <!-- Puzzle pieces will be inserted here -->
+        </div>
+        <button id="resetButton">Reset</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6a0dad, #a74d7a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+.puzzle {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 2px;
+    margin-bottom: 20px;
+}
+
+.puzzle div {
+    width: 100px;
+    height: 100px;
+    background-image: url('puzzle-image.jpg');
+    background-size: 300px 300px;
+    background-position: 0 0;
+    cursor: pointer;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+const puzzle = document.getElementById('puzzle');
+const resetButton = document.getElementById('resetButton');
+const gridSize = 3;
+let pieces = [];
+
+// Function to initialize puzzle pieces
+function initPuzzle() {
+    pieces = [];
+    puzzle.innerHTML = '';
+    
+    for (let i = 0; i < gridSize * gridSize; i++) {
+        let piece = document.createElement('div');
+        piece.style.backgroundPosition = `${-100 * (i % gridSize)}px ${-100 * Math.floor(i / gridSize)}px`;
+        piece.dataset.index = i;
+        piece.addEventListener('click', () => movePiece(i));
+        puzzle.appendChild(piece);
+        pieces.push(piece);
+    }
+}
+
+// Function to move a piece
+function movePiece(index) {
+    // Swap logic here (e.g., move piece to empty spot)
+}
+
+// Function to reset the puzzle
+function resetPuzzle() {
+    initPuzzle();
+}
+
+// Initialize puzzle on page load
+initPuzzle();
+
+// Reset button functionality
+resetButton.addEventListener('click', resetPuzzle);
